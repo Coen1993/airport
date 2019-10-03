@@ -12,12 +12,12 @@ function postNewPlane() {
     console.log(validJsonPlane);
 
     $.ajax({
-        url:"api/plane/add",
+        url:"http://localhost:8010/api/plane/add",
         type:"post",
         contentType: "application/json",
         data: validJsonPlane,
-        success: function(data) {
-            console.log("This is the data: " + data);
+        success: function(result) {
+            console.log("This is the data: " + result);
             getPlanes();
         }
     });
@@ -28,17 +28,20 @@ function getPlanes() {
     $.ajax({
         url:"api/plane/planes",
         type:"get",
-        success: function(data) {
-            console.log("This is the data: " + data);
+        success: function(result) {
+            console.log("This is the data: " + result);
 
             var total = "Planes: ";
 
-            $.each(data, function(index, plane) {
+            $.each(result, function(index, plane) {
                 total = total + plane.planeIdentification + ". ";
             });
 
             $("#data").text(total);
         }
     });
-
 }
+
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
