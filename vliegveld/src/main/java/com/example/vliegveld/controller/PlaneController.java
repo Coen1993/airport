@@ -1,8 +1,8 @@
 package com.example.vliegveld.controller;
 
+import com.example.vliegveld.exceptions.NotFoundException;
 import com.example.vliegveld.model.Plane;
 import com.example.vliegveld.service.PlaneService;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +25,7 @@ public class PlaneController {
     }
 
     @PostMapping("add")
-    public Plane addPlane(@RequestBody Plane newPlane) throws NotFoundException{
+    public Plane addPlane(@RequestBody Plane newPlane) throws NotFoundException {
         return this.planeService.add(newPlane);
     }
 }

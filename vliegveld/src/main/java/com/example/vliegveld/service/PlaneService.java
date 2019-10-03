@@ -1,8 +1,8 @@
 package com.example.vliegveld.service;
 
+import com.example.vliegveld.exceptions.NotFoundException;
 import com.example.vliegveld.model.Plane;
 import com.example.vliegveld.repository.PlaneRepository;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,10 @@ public class PlaneService {
         return planes;
     }
 
-    public Plane add(Plane plane) {
+    public Plane add(Plane plane) throws NotFoundException {
+        if(plane.getPlaneIdentification() == null) {
+            throw new NotFoundException();
+        }
         return this.planeRepository.save(plane);
     }
 }
